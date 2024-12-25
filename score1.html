@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>多表格動態頁面</title>
+    <style>
+        table {
+            width: 80%;
+            border-collapse: collapse;
+            margin: 20px auto;
+        }
+        th, td {
+            border: 1px solid #ccc;
+            text-align: center;
+            padding: 10px;
+        }
+        th {
+            background-color: #f4f4f4;
+        }
+        input {
+            width: 90%;
+            padding: 5px;
+        }
+        .add-row {
+            display: block;
+            margin: 20px auto;
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        .add-row:hover {
+            background-color: #45a049;
+        }
+        h2 {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <h1 style="text-align: center;">多表格動態頁面</h1>
+
+    <!-- 第一個表格 -->
+    <h2>數字X</h2>
+    <table id="table1">
+        <thead>
+            <tr>
+                <th>排名</th>
+                <th>玩家名稱</th>
+                <th>數字X</th>
+                <th>翻牌次數</th>
+                <th>翻牌時間</th>
+				<th>翻牌分數</th>
+                <th>時間分數</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>1</td>
+                <td><input type="text" placeholder="玩家名稱"></td>
+                <td><input type="number" placeholder="數字X"></td>
+                <td><input type="number" placeholder="翻牌次數"></td>
+                <td><input type="text" placeholder="翻牌時間"></td>
+				<td><input type="number" placeholder="翻牌分數"></td>
+				<td><input type="number" placeholder="時間分數"></td>
+            </tr>
+        </tbody>
+    </table>
+    <button class="add-row" onclick="addRow('table1')">新增列</button>
+
+    <!-- 第二個表格 -->
+    <h2>撲克牌52</h2>
+    <table id="table2">
+        <thead>
+            <tr>
+                <th>排名</th>
+                <th>玩家名稱</th>
+                <th>翻牌次數</th>
+                <th>翻牌時間</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>1</td>
+                <td><input type="text" placeholder="玩家名稱"></td>
+                <td><input type="number" placeholder="翻牌次數"></td>
+                <td><input type="text" placeholder="翻牌時間"></td>
+            </tr>
+        </tbody>
+    </table>
+    <button class="add-row" onclick="addRow('table2')">新增列</button>
+
+    <!-- 第三個表格 -->
+    <h2>撲克牌54</h2>
+    <table id="table3">
+        <thead>
+            <tr>
+                <th>排名</th>
+                <th>玩家名稱</th>
+                <th>翻牌次數</th>
+                <th>翻牌時間</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>1</td>
+                <td><input type="text" placeholder="玩家名稱"></td>
+                <td><input type="number" placeholder="翻牌次數"></td>
+                <td><input type="text" placeholder="翻牌時間"></td>
+            </tr>
+        </tbody>
+    </table>
+    <button class="add-row" onclick="addRow('table3')">新增列</button>
+
+    <script>
+        function addRow(tableId) {
+            const table = document.getElementById(tableId).getElementsByTagName('tbody')[0];
+            const newRow = table.insertRow();
+            const columnCount = table.rows[0].cells.length;
+
+            for (let i = 0; i < columnCount; i++) {
+                const cell = newRow.insertCell(i);
+                if (i === 0) {
+                    // 更新排名欄位
+                    cell.textContent = table.rows.length;
+                } else {
+                    const input = document.createElement("input");
+                    input.type = i === 1 ? "text" : "number"; // 第2列為文字，其他列為數字
+                    input.placeholder = "輸入數據";
+                    cell.appendChild(input);
+                }
+            }
+        }
+    </script>
+</body>
+</html>
